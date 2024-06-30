@@ -64,6 +64,17 @@ app.get('/login', async (req, res) => {
   }
 });
 
+
+app.get('/students', async (req, res) => {
+  try {
+    const students = await Student.find({});
+    return res.json({ success: true, message: 'Fetched all students', data: students });
+  } catch (error) {
+    console.error('Error fetching students:', error);
+    return res.status(500).json({ success: false, message: 'Error fetching students' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
